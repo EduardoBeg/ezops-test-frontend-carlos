@@ -1,6 +1,8 @@
 {
-  "name": "ezops-test-frontend-carlos",
-  "version": "0.1.0",
+  "name": "imessage_frontend",
+  "version": "0.0.1",
+  "description": "iMessage frontend",
+  "author": "Carlos Eduardo Begnini",
   "license": "ISC",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
