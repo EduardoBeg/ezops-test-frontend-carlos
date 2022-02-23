@@ -18,3 +18,12 @@ jobs:
         echo "${{ secrets.DOCKER_PASSWD }}" | docker login -u "begninix" --password-stdin
         docker image build -t begninix/ezops-frontend:master .
         docker push begninix/ezops-frontend:master
+
+    - name: recreate containers
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          docker-compose pull && docker-compose up -d
+        host: ${{ secrets.HOST }}
+        user: ubuntu
+        key: ${{ secrets.PRIVATE_KEY}}
