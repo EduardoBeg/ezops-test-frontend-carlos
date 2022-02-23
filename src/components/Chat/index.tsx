@@ -23,7 +23,7 @@ export function Chat() {
             setMessages(messages.data)
         })
 
-        const socket = io("http://app.testaporta.com:3333")
+        const socket = io("http://18.231.189.141:3333")
 
         socket.on('message', (msg) => {
             setMessages(messages => [...messages, msg])
@@ -36,7 +36,7 @@ export function Chat() {
             return;
         }
 
-        await axios.post('http://app.testaporta.com:3333/message', {
+        await axios.post('http://18.231.189.141:3333/message', {
             name: localStorage.getItem('imessageName'),
             message: message,
         })
@@ -47,13 +47,13 @@ export function Chat() {
         const formData = new FormData();
         formData.append("file", e.target.files[0]);
 
-        axios.post('http://app.testaporta.com:3333/message/file', formData, {
+        axios.post('http://18.231.189.141:3333/message/file', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(async res => {
             if (res.data && res.statusText === 'Created') {
-                await axios.post('http://app.testaporta.com:3333/message', {
+                await axios.post('http://18.231.189.141:3333/message', {
                     name: localStorage.getItem('imessageName'),
                     file: res.data[0],
                     fileName: res.data[1],
