@@ -19,11 +19,11 @@ export function Chat() {
     }
 
     useEffect(() => {
-        axios.get('http://172.16.98.5:3333/message').then((messages) => {
+        axios.get('http://app.testaporta.com:3333/message').then((messages) => {
             setMessages(messages.data)
         })
 
-        const socket = io("http://172.16.98.5:3333")
+        const socket = io("http://app.testaporta.com:3333")
 
         socket.on('message', (msg) => {
             setMessages(messages => [...messages, msg])
@@ -32,12 +32,11 @@ export function Chat() {
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault()
-        console.log(message, localStorage.getItem('imessageName'))
         if (message.trim() === '') {
             return;
         }
 
-        await axios.post('http://172.16.98.5:3333/message', {
+        await axios.post('http://app.testaporta.com:3333/message', {
             name: localStorage.getItem('imessageName'),
             message: message,
         })
@@ -48,14 +47,13 @@ export function Chat() {
         const formData = new FormData();
         formData.append("file", e.target.files[0]);
 
-        axios.post('http://localhost:3333/message/file', formData, {
+        axios.post('http://app.testaporta.com:3333/message/file', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(async res => {
-            console.log(res)
             if (res.data && res.statusText === 'Created') {
-                await axios.post('http://localhost:3333/message', {
+                await axios.post('http://app.testaporta.com:3333/message', {
                     name: localStorage.getItem('imessageName'),
                     file: res.data[0],
                     fileName: res.data[1],
