@@ -1,4 +1,4 @@
-name: Python application
+name: iMessage frontend deploy
 
 on:
   push:
